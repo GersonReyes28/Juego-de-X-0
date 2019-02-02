@@ -11,11 +11,11 @@ public class ProyectoI {
 public static void main (String arg[]){
         
         //----- Variables -----
-        
         String player1;
         String player2;
         String symbol1;
         String symbol2;
+        String position2 ;
         boolean ganador = false;
         Scanner read = new Scanner(System.in);
         int menu = 0;
@@ -43,19 +43,19 @@ public static void main (String arg[]){
         symbol2 = read.next();
         System.out.println("");
         
-        
+        do{
             //----- Game Logic -------
             while(finish != true){
                 
-
+                error=false;
                             
-                System.out.println("\t   A\t    B\t    C");
+                System.out.println("\t\t   A\t    B\t    C");
                 System.out.println("");
-                System.out.println("1\t   "+step1a+"\t|   "+step1b+"\t|   "+step1c);
+                System.out.println("\t1\t   "+step1a+"\t|   "+step1b+"\t|   "+step1c);
                 System.out.println("");
-                System.out.println("2\t   "+step2a+"\t|   "+step2b+"\t|   "+step2c);
+                System.out.println("\t2\t   "+step2a+"\t|   "+step2b+"\t|   "+step2c);
                 System.out.println("");
-                System.out.println("3\t   "+step3a+"\t|   "+step3b+"\t|   "+step3c);
+                System.out.println("\t3\t   "+step3a+"\t|   "+step3b+"\t|   "+step3c);
                 
                 if(
                     ((step1a == step1b && step1a == step1c && step1a != "_")|| //columnas
@@ -84,13 +84,13 @@ public static void main (String arg[]){
                     if(turn == 1)
                     {
                         System.out.println("");
-                        System.out.println("el ganador es el jugador: "+player2);
+                        System.out.println("The winner is "+player2);
                         win2++;
                     }
                     else
                     {
                         System.out.println("");
-                        System.out.println("el ganador es el jugador: " +player1);
+                        System.out.println("The winner is " +player1);
                         win1++;
                     }
                     finish = true;
@@ -99,15 +99,40 @@ public static void main (String arg[]){
                 }
                 else
                 {
+                    int i = 0;
+                    boolean letter = false;
                     System.out.println("____________________________________________________");
-                    System.out.println("1. Position 1A\t"+"4. Position 2A\t"+"7. Position 3A");
-                    System.out.println("2. Position 1B\t"+"5. Position 2B\t"+"8. Position 3B");
-                    System.out.println("3. Position 1C\t"+"6. Position 2C\t"+"9. Position 3C");
+                    System.out.println("\t\t   1\t   2\t   3");
+                    System.out.println("\t\t   4\t   5\t   6");
+                    System.out.println("\t\t   7\t   8\t   9");
                     System.out.println("____________________________________________________");
-                    System.out.print("En qué posición desea colocarse:");
-                    position = read.nextInt();
-                 
+                    
+                    
+                        System.out.print("select");   
+                        position2 = read.next();
+                        
+                        
+                 /*
+                if (position2 == "1" || position2 =="2" || position2 =="3" || position2 =="4"
+                         || position2 =="5" ||position2 =="6" || position2 =="7" || position2 =="8"
+                         || position2 =="9")
+                {
+                   
+                    error = false;
                 }
+                        else if(position2 != "1" && position2 !="2" && position2 !="3" && position2 !="4" 
+                         && position2 !="5" && position2 !="6" && position2 !="7" && position2 !="8"
+                         && position2 !="9")
+                {
+                    error = true;
+                     System.out.println("Invalid option");
+                    position2 = "1";
+                }
+
+               
+                position = Integer.parseInt(position2);
+                */
+                position = Integer.parseInt(position2);
                 if(error)
                 {
                     if(turn == 1)
@@ -130,9 +155,14 @@ public static void main (String arg[]){
                         symbol3 = symbol2;
                             
                     }
-                            
+                if (position > 9 || position < 1)
+                {
+                    error = true;
+                    System.out.println("There is no such position");
 
-                    
+                }
+                
+                           
                 switch(position){
                     case 1:
                         
@@ -246,12 +276,27 @@ public static void main (String arg[]){
                 
 
                 
-
+                }
             }
-           
-        
-    
+            if(tie)
+                System.out.println("Tie");
+            
+            
+            ganador = false;
+            finish = false;
+            
+            step1a = step1b = step1c = "_";
+            step2a = step2b = step2c = "_";
+            step3a = step3b = step3c = "_";
+            
+            System.out.println("");
+            System.out.println("1. Play again");
+            System.out.println("2. View stadistics");
+            menu = read.nextInt();
+            
+        }while(menu !=2);
+        System.out.println("");
+        System.out.println(player1+" has won "+win1+" games and lost "+win2+" games");
+        System.out.println(player2+" has won "+win2+" games and lost "+win1+" games");
     }
-    
-}
-  
+   }
